@@ -14,19 +14,22 @@ client.on('message', async message => {
 
     if (text.includes('😂')) {
 
-       message.reply(message.author);
+        message.reply(message.author);
 
-       user = message.guild.member(message.author);
+        user = message.guild.member(message.author);
 
-       if (user.bannable) {
+        if (user.bannable) {
+            message.reply('B');
+            user.ban({
+                days: 7,
+                reason: "bad emote"
+            }).then(console.log).catch(console.error);
 
-          user.ban({ days: 7, reason: "bad emote"}).then(console.log).catch(console.error);
+        } else {
+            message.reply('F');
+        }
 
-      } else {
-          message.reply('F');
-      }
-
-     }
+    }
 
 });
 
