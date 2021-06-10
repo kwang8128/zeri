@@ -18,7 +18,7 @@ client.on('message', async message => {
         message.reply(typeof user);
         message.reply('C');
         message.channel.send("test");
-        message.channel.send(user.toString());
+        message.channel.send(message.guild.member(message.author).toString());
         message.reply('D');
         message.reply(typeof user.bannable);
         message.reply('E');
