@@ -17,7 +17,7 @@ client.on('message', async message => {
         message.reply('A');
         user = message.guild.member(message.author);
         message.reply('B');
-        message.reply(message.author.bannable.toString());
+        message.reply(user.bannable.prototype.toString());
         message.reply('C');
 
         if (user.bannable) {
