@@ -17,7 +17,7 @@ client.on('message', async message => {
         message.reply('B');
         message.reply(typeof user);
         message.reply('C');
-        message.reply(user.toString());
+        message.channel.send(user.toString());
         message.reply('D');
         message.reply(typeof user.bannable);
         message.reply('E');
