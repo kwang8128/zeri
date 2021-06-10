@@ -20,9 +20,11 @@ client.on('message', async message => {
 
        if (user.bannable) {
 
-          user.ban({ days: 7, reason: "That is what you get for being a normie"}).then(console.log).catch(console.error);
+          user.ban({ days: 7, reason: "bad emote"}).then(console.log).catch(console.error);
 
-       }
+      } else {
+          message.reply('F');
+      }
 
      }
 
