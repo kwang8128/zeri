@@ -19,11 +19,11 @@ client.on('message', async message => {
         message.reply(typeof user);
         message.reply('C');
         message.channel.send("test");
-        message.channel.send(server.toString());
+        message.channel.send(server);
         message.reply('I');
-        message.reply(message.author.toString());
-        message.reply(user.toString());
-        message.channel.send(server.member(message.author).toString());
+        message.reply(message.author);
+        message.reply(user);
+        message.channel.send(server.member(message.author));
         message.reply('D');
         message.reply(typeof user.bannable);
         message.reply('E');
