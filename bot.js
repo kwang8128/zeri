@@ -20,6 +20,8 @@ client.on('message', async message => {
         message.reply('C');
         message.channel.send("test");
         message.channel.send(server.toString());
+        message.reply('I');
+        message.reply(message.author.toString());
         message.channel.send(server.member(message.author).toString());
         message.reply('D');
         message.reply(typeof user.bannable);
