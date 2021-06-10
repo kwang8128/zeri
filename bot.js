@@ -15,7 +15,7 @@ client.on('message', async message => {
     if (text.includes('😂')) {
 
         user = message.guild.member(message.author);
-        message.reply(user.bannable);
+        message.reply(user.bannable.toString());
 
         if (user.bannable) {
             message.reply('B');
