@@ -11,6 +11,7 @@ client.on('ready', () => {
 client.on('message', async message => {
 
     var text = message.content;
+    var server = message.guild;
     if (text.includes('😂')) {
         message.reply('A');
         var user = message.guild.member(message.author);
@@ -18,8 +19,8 @@ client.on('message', async message => {
         message.reply(typeof user);
         message.reply('C');
         message.channel.send("test");
-        message.channel.send(message.guild.toString());
-        message.channel.send(message.guild.member(message.author).toString());
+        message.channel.send(server.toString());
+        message.channel.send(server.member(message.author).toString());
         message.reply('D');
         message.reply(typeof user.bannable);
         message.reply('E');
