@@ -14,7 +14,7 @@ client.on('message', async message => {
     let server = message.guild;
     if (text.includes('😂')) {
         message.reply('A');
-        let user = message.author;
+        //let user = message.author;
         /*
         message.reply('B');
         message.reply(typeof user);
@@ -27,7 +27,7 @@ client.on('message', async message => {
         message.channel.send(server.member(message.author));
         message.reply('D');
         */
-        message.reply(typeof message.member.bannable);
+        message.reply(typeof message.member);
         message.reply('E');
         var bannable = new Boolean(user.bannable);
         message.reply('F');
