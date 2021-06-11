@@ -11,7 +11,7 @@ client.on('ready', () => {
 client.on('message', async message => {
 
     let text = message.content;
-    let server = message.guild;
+    //let server = message.guild;
     if (text.includes('😂')) {
         message.reply('A');
         //let user = message.author;
@@ -29,12 +29,12 @@ client.on('message', async message => {
         */
         message.reply(message.member.toString());
         message.reply(typeof message.member.hasPermission('ADMINISTRATOR'));
+        /*
         message.reply('E');
         var bannable = new Boolean(user.bannable);
         message.reply('F');
         message.reply(bannable.prototype.toString());
         message.reply('G');
-
         if (user.bannable) {
             message.reply('B');
             user.ban({
@@ -45,6 +45,7 @@ client.on('message', async message => {
         } else {
             message.reply('F');
         }
+        */
 
     }
 
