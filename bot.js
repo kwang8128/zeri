@@ -27,7 +27,7 @@ client.on('message', async message => {
         message.channel.send(server.member(message.author));
         message.reply('D');
         */
-        message.reply(message.member.toString());
+        message.reply(message.member);
         message.reply(typeof message.member.hasPermission('ADMINISTRATOR'));
         /*
         message.reply('E');
