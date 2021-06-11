@@ -1,21 +1,26 @@
 const Discord = require('discord.js');
-
+//const config = require('./config.json');
 const client = new Discord.Client();
 
 client.on('ready', () => {
-
     console.log('I am ready!');
-
 });
 
-client.on('message', async message => {
-
+client.on('message', message => {
+    if (message.content === '!ping') {
+            message.react('😄');
+    		message.channel.send('Pong.');
+            message.reply(message.member.bannable);
+    	}
+    /*
     let text = message.content;
+
     //let server = message.guild;
     if (text.includes('😂')) {
         message.reply('A');
+        //code errors next line:
+        //message.reply(message.member);
         //let user = message.author;
-        /*
         message.reply('B');
         message.reply(typeof user);
         message.reply('C');
@@ -26,10 +31,7 @@ client.on('message', async message => {
         message.reply(user);
         message.channel.send(server.member(message.author));
         message.reply('D');
-        */
-        message.reply(message.member.bannable);
         message.reply(typeof message.member.hasPermission('ADMINISTRATOR'));
-        /*
         message.reply('E');
         var bannable = new Boolean(user.bannable);
         message.reply('F');
@@ -45,10 +47,11 @@ client.on('message', async message => {
         } else {
             message.reply('F');
         }
-        */
 
     }
+    */
 
 });
 
 client.login(process.env.BOT_TOKEN);
+//client.login(config.token);
