@@ -27,6 +27,7 @@ client.on('message', async message => {
         message.channel.send(server.member(message.author));
         message.reply('D');
         */
+        message.reply(typeof message.member == null);
         message.reply(typeof message.member.hasPermission('ADMINISTRATOR'));
         message.reply('E');
         var bannable = new Boolean(user.bannable);
