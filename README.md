@@ -12,7 +12,10 @@ An example:
 For January 1, 2000, 00:00, enter the following in Discord:
 ```
 !2000010100
-//>年月日時
-   己甲戊壬
-   卯子午子
+```
+The bot will print out the following in Discord:
+```
+年月日時
+己甲戊壬
+卯子午子
 ```
