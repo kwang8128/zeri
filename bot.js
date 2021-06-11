@@ -10,11 +10,11 @@ client.on('ready', () => {
 
 client.on('message', async message => {
 
-    var text = message.content;
-    var server = message.guild;
+    let text = message.content;
+    let server = message.guild;
     if (text.includes('😂')) {
         message.reply('A');
-        var user = message.guild.member(message.author);
+        let user = message.author;
         /*
         message.reply('B');
         message.reply(typeof user);
@@ -27,7 +27,7 @@ client.on('message', async message => {
         message.channel.send(server.member(message.author));
         message.reply('D');
         */
-        message.reply(typeof user.bannable);
+        message.reply(typeof message.member.bannable);
         message.reply('E');
         var bannable = new Boolean(user.bannable);
         message.reply('F');
