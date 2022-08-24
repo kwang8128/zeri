@@ -31,9 +31,15 @@ client.on('message', message => {
         message.reply('\n年月日時\n' + response);
     }
     if (text.charAt(0) == '#') {
-        let lower = parseInt(text.slice(1, 4));
-        let upper = parseInt(text.slice(5, 8));
-        let changing = parseInt(text.slice(9, 12));
+        const numArray = text.split(' ');
+        let lower = numArray[0].slice(1);
+        let upper = numArray[1];
+        let changing;
+        if (numArray.length == 2) {
+            changing = parseInt(lower) + parseInt(upper);
+        } else {
+            changing = numArray[2];
+        }
         let hexagram = getTrigram(upper%8) + '\n' + getTrigram(lower%8);
         let changingLine = changing%6;
         if (changingLine == 0) {
