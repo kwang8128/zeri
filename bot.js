@@ -14,7 +14,20 @@ var hour;
 var HS;
 var EB;
 
+// '☷'; '☳'; '☵'; '☱'; '☶'; '☲'; '☴'; '☰';
+// '☷' '☶' '☵' '☴' '☳' '☲' '☱' '☰'
+
 const trigramArray = [0, 7, 3, 5, 1, 6, 2, 4];
+const hexLookup = {
+    '☷': {'☷': '䷁', '☵': '䷖', '☵': '䷇', '☴': '䷓', '☳': '䷏', '☲': '䷢', '☱': '䷬', '☰': '䷋'},
+    '☶': {'☷': '䷎', '☵': '䷳', '☵': '䷦', '☴': '䷴', '☳': '䷽', '☲': '䷷', '☱': '䷞', '☰': '䷠'},
+    '☵': {'☷': '䷆', '☵': '䷃', '☵': '䷜', '☴': '䷺', '☳': '䷧', '☲': '䷿', '☱': '䷮', '☰': '䷅'},
+    '☴': {'☷': '䷭', '☵': '䷑', '☵': '䷯', '☴': '䷸', '☳': '䷟', '☲': '䷱', '☱': '䷛', '☰': '䷫'},
+    '☳': {'☷': '䷗', '☵': '䷚', '☵': '䷂', '☴': '䷩', '☳': '䷲', '☲': '䷔', '☱': '䷐', '☰': '䷘'},
+    '☲': {'☷': '䷣', '☵': '䷕', '☵': '䷾', '☴': '䷤', '☳': '䷶', '☲': '䷝', '☱': '䷰', '☰': '䷌'},
+    '☱': {'☷': '䷒', '☵': '䷨', '☵': '䷻', '☴': '䷼', '☳': '䷵', '☲': '䷥', '☱': '䷹', '☰': '䷉'},
+    '☰': {'☷': '䷊', '☵': '䷙', '☵': '䷄', '☴': '䷈', '☳': '䷡', '☲': '䷍', '☱': '䷪', '☰': '䷀'}
+}
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -44,7 +57,8 @@ client.on('message', message => {
         } else {
             changing = numArray[2];
         }
-        let hexagram = getTrigram(trigramArray[upper%8]) + '\n' + getTrigram(trigramArray[lower%8]);
+        let hexagram = getHexagram(getTrigram(trigramArray[upper%8]), getTrigram(trigramArray[lower%8]));
+        let hexagramNum = hexagram.charCodeAt(0) - '䷀'.charCodeAt(0) + 1;
         let changingLine = changing%6;
         if (changingLine == 0) {
             changingLine = 6;
@@ -52,13 +66,16 @@ client.on('message', message => {
         currCh = changingLine;
         if (changingLine > 3) {
             currCh = changingLine - 3;
-            chHexagram = getTrigram(trigramArray[upper%8] ^ 1 << currCh - 1) + '\n' + getTrigram(trigramArray[lower%8]);
+            chHexagram = getHexagram(getTrigram(trigramArray[upper%8] ^ 1 << currCh - 1), getTrigram(trigramArray[lower%8]));
         } else {
-            chHexagram = getTrigram(trigramArray[upper%8]) + '\n' + getTrigram(trigramArray[lower%8] ^ 1 << currCh - 1);
+            chHexagram = getHexagram(getTrigram(trigramArray[upper%8]), getTrigram(trigramArray[lower%8] ^ 1 << currCh - 1));
         }
-        message.reply(`Your Hexagram:
+        message.reply(
+`Your Hexagram:
 ${hexagram}
+https://ctext.org/book-of-changes#:~:text=${hexagramNum}
 Changing Line: ${changingLine}
+
 Changing Hexagram:
 ${chHexagram}`);
     }
@@ -88,6 +105,10 @@ client.on('messageReactionAdd', (messageReaction, user) => {
         }
     }
 });
+
+function getHexagram(upper, lower) {
+    return hexLookup[lower][upper];
+}
 
 function getTrigram(num) {
     switch (num) {
