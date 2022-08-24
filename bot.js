@@ -1,8 +1,6 @@
 const Discord = require('discord.js');
 const CalendarChinese = require('date-chinese').CalendarChinese;
 const julian = require('astronomia/julian');
-//comment below line for production
-require('dotenv').config();
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
