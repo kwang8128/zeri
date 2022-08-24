@@ -10,9 +10,9 @@
     "astronomia": "^4.0.0",
     "date-chinese": "^2.1.0",
     "discord.js": "^11.6.4",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.1",
     "node": "14.x",
-    "npm": "6.x",
+    "npm": "^8.18.0",
     "request": "^2.81.0"
   }
 }

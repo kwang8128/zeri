@@ -1,7 +1,12 @@
 const Discord = require('discord.js');
 const CalendarChinese = require('date-chinese').CalendarChinese;
 const julian = require('astronomia/julian');
-//const config = require('./config.json');
+//comment below line for production
+require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 const client = new Discord.Client();
 
 var year;
@@ -26,6 +31,17 @@ client.on('message', message => {
         cal.fromGregorian(year, month, day);
         response = bazi(cal);
         message.reply('\n年月日時\n' + response);
+    }
+    if (text.charAt(0) == '#') {
+        let lower = parseInt(text.slice(1, 4));
+        let upper = parseInt(text.slice(5, 8));
+        let changing = parseInt(text.slice(9, 12));
+        let hexagram = getTrigram(upper%8) + '\n' + getTrigram(lower%8);
+        let changingLine = changing%6;
+        if (changingLine == 0) {
+            changingLine = 6;
+        }
+        message.reply('Your Hexagram: \n' + hexagram + '\nChanging Line: ' + changingLine);
     }
     if (text.includes('😂')) {
         let user = message.member;
@@ -56,6 +72,37 @@ client.on('messageReactionAdd', (messageReaction, user) => {
         }
     }
 });
+
+function getTrigram(num) {
+    switch (num) {
+        case 0:
+            return '☷';
+            break;
+        case 1:
+            return '☰';
+            break;
+        case 2:
+            return '☱';
+            break;
+        case 3:
+            return '☲';
+            break;
+        case 4:
+            return '☳';
+            break;
+        case 5:
+            return '☴';
+            break;
+        case 6:
+            return '☵';
+            break;
+        case 7:
+            return '☶';
+            break;
+        default:
+            console.log('error');
+    }
+}
 
 function bazi(cal) {
     let yearHS = (cal.year + 9) % 10 + 1;
@@ -166,4 +213,3 @@ function getEBChinese(num) {
 }
 
 client.login(process.env.BOT_TOKEN);
-//client.login(config.token);
