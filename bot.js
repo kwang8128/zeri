@@ -71,12 +71,12 @@ client.on('message', message => {
             chHexagram = getHexagram(getTrigram(trigramArray[upper%8]), getTrigram(trigramArray[lower%8] ^ 1 << currCh - 1));
         }
         message.reply(
-`Your Hexagram:
+`Base Hexagram:
 ${hexagram}
 https://ctext.org/book-of-changes#:~:text=${hexagramNum}
 Changing Line: ${changingLine}
 
-Changing Hexagram:
+Changed Hexagram:
 ${chHexagram}`);
     }
     if (text.includes('😂')) {
