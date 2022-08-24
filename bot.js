@@ -14,6 +14,8 @@ var hour;
 var HS;
 var EB;
 
+const trigramArray = [0, 7, 3, 5, 1, 6, 2, 4];
+
 client.on('ready', () => {
     console.log('I am ready!');
 });
@@ -35,17 +37,30 @@ client.on('message', message => {
         let lower = numArray[0].slice(1);
         let upper = numArray[1];
         let changing;
+        let chHexagram;
+        let currCh;
         if (numArray.length == 2) {
             changing = parseInt(lower) + parseInt(upper);
         } else {
             changing = numArray[2];
         }
-        let hexagram = getTrigram(upper%8) + '\n' + getTrigram(lower%8);
+        let hexagram = getTrigram(trigramArray[upper%8]) + '\n' + getTrigram(trigramArray[lower%8]);
         let changingLine = changing%6;
         if (changingLine == 0) {
             changingLine = 6;
         }
-        message.reply('Your Hexagram: \n' + hexagram + '\nChanging Line: ' + changingLine);
+        currCh = changingLine;
+        if (changingLine > 3) {
+            currCh = changingLine - 3;
+            chHexagram = getTrigram(trigramArray[upper%8] ^ 1 << currCh - 1) + '\n' + getTrigram(trigramArray[lower%8]);
+        } else {
+            chHexagram = getTrigram(trigramArray[upper%8]) + '\n' + getTrigram(trigramArray[lower%8] ^ 1 << currCh - 1);
+        }
+        message.reply(`Your Hexagram:
+${hexagram}
+Changing Line: ${changingLine}
+Changing Hexagram:
+${chHexagram}`);
     }
     if (text.includes('😂')) {
         let user = message.member;
@@ -63,9 +78,6 @@ client.on('message', message => {
 client.on('messageReactionAdd', (messageReaction, user) => {
     let emote = messageReaction.emoji.toString();
     if (emote == '😂') {
-        //code errors next line:
-        //message.reply(message.member);
-        //let user = message.author;
         if (user.bannable) {
             user.ban({
                 days: 7,
@@ -83,25 +95,25 @@ function getTrigram(num) {
             return '☷';
             break;
         case 1:
-            return '☰';
-            break;
-        case 2:
-            return '☱';
-            break;
-        case 3:
-            return '☲';
-            break;
-        case 4:
             return '☳';
             break;
-        case 5:
-            return '☴';
-            break;
-        case 6:
+        case 2:
             return '☵';
             break;
-        case 7:
+        case 3:
+            return '☱';
+            break;
+        case 4:
             return '☶';
+            break;
+        case 5:
+            return '☲';
+            break;
+        case 6:
+            return '☴';
+            break;
+        case 7:
+            return '☰';
             break;
         default:
             console.log('error');
