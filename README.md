@@ -27,5 +27,5 @@ This bot also helps with generating a hexagram based on numbers provided by the 
 Sample usage:
 ```
 #<first number> <second number> <optional: third number>
-//> gives bazi of the date
+//> gives hexagram information
 ```
